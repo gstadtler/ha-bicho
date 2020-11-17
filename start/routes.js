@@ -20,4 +20,9 @@ Route.get('/', () => {
   return { greeting: 'Hello world in JSON' }
 })
 
-Route.resource("abrigos", "AbrigoController").apiOnly();
+Route.get('/users', 'UserController.index')
+Route.post('/users', 'UserController.create')
+
+Route.post('/sessions', 'SessionController.create')
+
+Route.resource('abrigos', 'AbrigoController').apiOnly()
