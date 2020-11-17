@@ -9,7 +9,7 @@ class AbrigoSchema extends Schema {
       table.increments()
       table.bigint('cnpj_cpf', 14).notNullable().unique()
       table.string('nome').notNullable()
-      table.string('email').notNullable()
+      table.string('email').notNullable().unique()
       table.text('descricao').notNullable()
       table.integer('qtd_animais').notNullable()
       table.bigint('telefone').notNullable()
