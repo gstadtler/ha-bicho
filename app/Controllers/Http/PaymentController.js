@@ -25,7 +25,7 @@ class PaymentController {
         }
       ],
 
-      auto_return: "approved",
+      auto_return: "all",
       back_urls: {
         success: process.env.ENV_HOST + "/payments/success",
         pending: process.env.ENV_HOST + "/payments/pending",
@@ -37,7 +37,6 @@ class PaymentController {
     //Generate init_point to checkout
     try {
       const response = await MercadoPago.preferences.create(donate);
-      console.log(response.body.init_point);
       return response;
     } catch (error) {
       console.log(error);
