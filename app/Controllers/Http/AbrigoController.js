@@ -66,6 +66,11 @@ class AbrigoController {
     return abrigo;
   }
 
+  async find ({ params }) {
+    const abrigo = await Abrigo.findByOrFail('email', params.email);
+    return abrigo;
+  }
+
   /**
    * Render a form to update an existing abrigo.
    * GET abrigos/:id/edit
@@ -101,10 +106,10 @@ class AbrigoController {
       'cidade',
       'uf'
     ]);
-    
+
     abrigo.merge(data);
     await abrigo.save();
-    
+
     return abrigo;
   }
 

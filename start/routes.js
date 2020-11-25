@@ -24,6 +24,8 @@ Route.post('/register', 'AuthController.register')
 Route.post('/login', 'AuthController.login')
 Route.get('/show', 'AuthController.show').middleware(["auth"])
 
+Route.get('/find/:email', 'AbrigoController.find').middleware(["auth"])
+
 Route.get('/payments/checkout/:id/:description/:amount', 'PaymentController.checkout')
 //Route.post('payments/checkout', 'PaymentController.checkout')
 
