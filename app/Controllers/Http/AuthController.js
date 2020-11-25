@@ -12,11 +12,11 @@ class AuthController {
 
     Object.assign(user, token)
 
-    let {username,email} = user
+    let {username,email,role} = user
     let {token:authToken} = token
 
     return response.json({
-      user:{username,email},
+      user:{username,email,role},
       token:authToken
     })
   }
@@ -32,12 +32,12 @@ class AuthController {
 
         Object.assign(user, token)
 
-        let {username} = user
+        let {username,role} = user
         let {token:authToken} = token
 
 
         return response.json({
-          user:{username,email},
+          user:{username,email,role},
           token:authToken
         })
       }
