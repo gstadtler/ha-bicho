@@ -11,6 +11,7 @@ class PaymentController {
     });
 
     const { id, description, amount } = request.params;
+    const donation = `Doação para o abrigo: ${description}`;
 
     //Create purchase item object template
     const donate = {
@@ -18,7 +19,7 @@ class PaymentController {
         {
           id: id,
           title: description,
-          description: description,
+          description: donation,
           quantity: 1,
           currency_id: 'BRL',
           unit_price: parseFloat(amount)
