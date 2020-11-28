@@ -30,3 +30,6 @@ Route.get('/payments/checkout/:id/:description/:amount', 'PaymentController.chec
 //Route.post('payments/checkout', 'PaymentController.checkout')
 
 Route.resource('abrigos', 'AbrigoController').apiOnly()
+Route.post('abrigos/:id/images', 'AbrigoImageController.store').middleware(["auth"])
+Route.get('abrigo-images/:path', 'AbrigoImageController.show')
+Route.get('/abrigos-mapa', 'AbrigoController.mapIndex')

@@ -24,6 +24,16 @@ class AbrigoController {
     return abrigos;
   }
 
+  async mapIndex ({ request }) {
+    const { latitude, longitude } = request.all()
+
+    const abrigos = Abrigo.query()
+      .nearBy(latitude, longitude, 10)
+      .fetch()
+
+    return abrigos
+  }
+
   /**
    * Create/save a new abrigo.
    * POST abrigos
@@ -46,6 +56,8 @@ class AbrigoController {
       'bairro',
       'cidade',
       'uf',
+      'latitude',
+      'longitude'
     ]);
     const abrigo = await Abrigo.create({ ...data });
 
@@ -63,11 +75,13 @@ class AbrigoController {
    */
   async show ({ params, request, response, view }) {
     const abrigo = await Abrigo.findOrFail(params.id);
+    await abrigo.load('images');
     return abrigo;
   }
 
   async find ({ params }) {
     const abrigo = await Abrigo.findByOrFail('email', params.email);
+    await abrigo.load('images');
     return abrigo;
   }
 
@@ -94,9 +108,10 @@ class AbrigoController {
   async update ({ params, request, response }) {
     const abrigo = await Abrigo.findOrFail(params.id);
     const data = request.only([
+      'cnpj_cpf',
       'nome',
-      'email',
       'descricao',
+      'historia',
       'qtd_animais',
       'telefone',
       'rua',

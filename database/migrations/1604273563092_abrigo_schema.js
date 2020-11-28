@@ -11,6 +11,7 @@ class AbrigoSchema extends Schema {
       table.string('nome').notNullable()
       table.string('email').notNullable().unique()
       table.text('descricao').notNullable()
+      table.text('historia')
       table.integer('qtd_animais').notNullable()
       table.bigint('telefone').notNullable()
       table.string('rua').notNullable()
@@ -19,6 +20,8 @@ class AbrigoSchema extends Schema {
       table.string('bairro').notNullable()
       table.string('cidade').notNullable()
       table.string('uf').notNullable()
+      table.decimal('latitude', 9, 6)
+      table.decimal('longitude', 9, 6)
       table.timestamps()
     })
   }
