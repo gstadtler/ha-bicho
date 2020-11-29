@@ -18,7 +18,7 @@ class PaymentController {
       items: [
         {
           id: id,
-          title: description,
+          title: donation,
           description: donation,
           quantity: 1,
           currency_id: 'BRL',

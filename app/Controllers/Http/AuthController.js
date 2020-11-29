@@ -41,12 +41,10 @@ class AuthController {
           token:authToken
         })
       }
-
-
     }
     catch (e) {
       console.log(e)
-      return response.json({message: 'Usuário não cadastrado!'})
+      return response.json({notRegistered: 'Usuário não cadastrado!'})
     }
   }
 
