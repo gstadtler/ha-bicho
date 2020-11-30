@@ -21,6 +21,10 @@ class Abrigo extends Model {
   images () {
     return this.hasMany('App/Models/AbrigoImage')
   }
+
+  donations () {
+    return this.hasMany('App/Models/Donation')
+  }
 }
 
 module.exports = Abrigo
