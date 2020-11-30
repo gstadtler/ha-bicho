@@ -17,19 +17,26 @@
 const Route = use('Route')
 
 Route.get('/', () => {
-  return { greeting: 'Hello world in JSON' }
+  return { greeting: 'Ha-bicho Server is On' }
 })
 
+// Rotas de Doadores
 Route.post('/register', 'AuthController.register')
 Route.post('/login', 'AuthController.login')
 Route.get('/show', 'AuthController.show').middleware(["auth"])
 
+// Rotas de Doações
+Route.post('/donations/:abrigoId/:userId', 'DonationController.store').middleware(["auth"])
+Route.get('/donations', 'DonationController.index')
+
+// Rotas de Pagamentos
+Route.get('/payments/checkout/:id/:abrigo/:amount', 'PaymentController.checkout')
+
+// Rotas de Abrigos
+Route.resource('abrigos', 'AbrigoController').apiOnly()
+Route.get('/abrigos-mapa', 'AbrigoController.mapIndex')
 Route.get('/find/:email', 'AbrigoController.find').middleware(["auth"])
 
-Route.get('/payments/checkout/:id/:description/:amount', 'PaymentController.checkout')
-//Route.post('payments/checkout', 'PaymentController.checkout')
-
-Route.resource('abrigos', 'AbrigoController').apiOnly()
+// Rotas de Imagens
 Route.post('abrigos/:id/images', 'AbrigoImageController.store').middleware(["auth"])
 Route.get('abrigo-images/:path', 'AbrigoImageController.show')
-Route.get('/abrigos-mapa', 'AbrigoController.mapIndex')
