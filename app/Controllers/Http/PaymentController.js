@@ -4,14 +4,16 @@
 const MercadoPago = require('mercadopago');
 
 class PaymentController {
-  async checkout({ request }) {
+  async checkout({ request, auth }) {
 
     MercadoPago.configure({
       access_token: process.env.MP_ACCESS_TOKEN
     });
 
-    const { id, description, amount } = request.params;
-    const donation = `Doação para o abrigo: ${description}`;
+    const { id, abrigo, amount } = request.params;
+    const donation = `Doação para o abrigo: ${abrigo}`;
+    const user = await auth.getUser();
+    const { username, email } = user;
 
     //Create purchase item object template
     const donate = {
@@ -25,13 +27,16 @@ class PaymentController {
           unit_price: parseFloat(amount)
         }
       ],
-
-      auto_return: "all",
+      payer: {
+        name: username,
+        email: email,
+      },
       back_urls: {
         success: process.env.ENV_HOST + "/payments/success",
         pending: process.env.ENV_HOST + "/payments/pending",
         failure: process.env.ENV_HOST + "/payments/failure",
-      }
+      },
+      auto_return: "approved",
 
     };
 
