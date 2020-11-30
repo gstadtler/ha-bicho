@@ -55,12 +55,13 @@ class AuthController {
         return response.json("User not found")
       }
 
-      const {username,email,role} = user;
+      const {username, email, role} = user;
+      const donations = await user.donations().fetch();
 
-      return response.json({username,email,role})
+      return response.json({username, email, role, donations})
 
     } catch (error) {
-      console.log(e)
+      console.log(error)
       return response.json({message: 'Usuário não encontrado!'})
     }
   }

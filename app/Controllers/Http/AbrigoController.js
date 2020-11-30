@@ -76,12 +76,14 @@ class AbrigoController {
   async show ({ params, request, response, view }) {
     const abrigo = await Abrigo.findOrFail(params.id);
     await abrigo.load('images');
+    await abrigo.load('donations');
     return abrigo;
   }
 
   async find ({ params }) {
     const abrigo = await Abrigo.findByOrFail('email', params.email);
     await abrigo.load('images');
+    await abrigo.load('donations');
     return abrigo;
   }
 
