@@ -57,7 +57,13 @@ class DonationController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async show ({ params, request, response, view }) {
+  async show ({ params, response }) {
+    const donation = await Donation.findOrFail(params.id);
+    const abrigo = await donation.abrigo().fetch();
+    const { quantia } = donation;
+    const { nome } = abrigo;
+
+    return response.json({ nome, quantia });
   }
 
   /**

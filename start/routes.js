@@ -28,6 +28,7 @@ Route.get('/show', 'AuthController.show').middleware(["auth"])
 // Rotas de Doações
 Route.post('/donations/:abrigoId/:userId', 'DonationController.store').middleware(["auth"])
 Route.get('/donations', 'DonationController.index')
+Route.get('/donations/:id', 'DonationController.show');
 
 // Rotas de Pagamentos
 Route.get('/payments/checkout/:id/:abrigo/:amount', 'PaymentController.checkout')

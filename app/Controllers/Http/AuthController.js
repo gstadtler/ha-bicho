@@ -55,10 +55,10 @@ class AuthController {
         return response.json("User not found")
       }
 
-      const {username, email, role} = user;
-      const donations = await user.donations().fetch();
+      const { id, username, email, role } = user;
+      const donations = await user.donations().with('abrigo').fetch();
 
-      return response.json({username, email, role, donations})
+      return response.json({ id, username, email, role, donations })
 
     } catch (error) {
       console.log(error)
