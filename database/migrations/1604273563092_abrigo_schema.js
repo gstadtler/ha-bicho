@@ -20,8 +20,6 @@ class AbrigoSchema extends Schema {
       table.string('bairro').notNullable()
       table.string('cidade').notNullable()
       table.string('uf').notNullable()
-      table.decimal('latitude', 9, 6)
-      table.decimal('longitude', 9, 6)
       table.timestamps()
     })
   }
